@@ -1,13 +1,7 @@
 package ie.atu.sw;
 
-import java.util.*;
-
 public class DotImpl implements ISimilarityCalculation {
-
-
-    public DotImpl() {
-
-    }
+    public DotImpl() {}
 
     @Override
     public double calculateSimilarity(double[] targetWeights, double[] testWeights) {

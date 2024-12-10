@@ -1,4 +1,4 @@
-# Java Word Simplifier
+# Java 21 Word Simplifier
 An API that is used to take a sample of text from a .txt file, 
 and simplify the passage using the top 1000 words according to Google 
 

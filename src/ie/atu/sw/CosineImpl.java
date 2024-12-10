@@ -1,15 +1,7 @@
 package ie.atu.sw;
 
-import java.util.List;
-import java.util.Map;
-
 public class CosineImpl implements ISimilarityCalculation {
-
-
-    public CosineImpl() {
-
-    }
-
+    public CosineImpl() {}
 
     @Override
     public double calculateSimilarity(double[] targetWeights, double[] testWeights) {

@@ -1,15 +1,7 @@
 package ie.atu.sw;
 
-import java.util.List;
-import java.util.Map;
-
 public class EuclideanImpl implements ISimilarityCalculation {
-
-
-    public EuclideanImpl() {
-
-    }
-
+    public EuclideanImpl() {}
     @Override
     public double calculateSimilarity(double[] targetWeights, double[] testWeights) {
         double similarityScore = 0.0d;

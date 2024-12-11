@@ -56,6 +56,10 @@ public class ModelWeights {
         try {
             String trimmed = currentLine.replaceAll("\\s+", "");
             String[] trimmedSplit = trimmed.split(",");
+
+            // throw an error in the event that the text file does not have corresponding models
+            if (trimmedSplit.length == 1) throw new Exception("This model is incomplete and possibly has no weights!");
+
             String currentWord = trimmedSplit[0];
             List<Double> currentWeights = new ArrayList<Double>();
 

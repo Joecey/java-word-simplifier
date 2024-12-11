@@ -19,4 +19,9 @@ public class DotImpl implements ISimilarityCalculation {
 
         return similarityScore;
     }
+
+    @Override
+    public String getName() {
+        return "Dot Product";
+    }
 }

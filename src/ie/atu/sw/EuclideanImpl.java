@@ -15,4 +15,9 @@ public class EuclideanImpl implements ISimilarityCalculation {
         // for this, we can return the negative similarityScore. i.e. larger value will imply shorter distance
         return -similarityScore;
     }
+
+    @Override
+    public String getName() {
+        return "Euclidean";
+    }
 }

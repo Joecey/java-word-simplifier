@@ -7,4 +7,7 @@ import java.util.*;
 
 public interface ISimilarityCalculation {
     public double calculateSimilarity(double[] targetWeights, double[] testWeights);
+    public String getName();
+
+    // TODO: CREATE A DICTIONARY THAT CONTAINS ALREADY CONTAINED WORDS!
 }

@@ -16,4 +16,9 @@ public class CosineImpl implements ISimilarityCalculation {
         // here, the closer to 1, the better the value (i.e. should be okay to assume bigger value the better
         return (dotProduct) / Math.sqrt(magnitudeTargetSquared * magnitudeTestSquared);
     }
+
+    @Override
+    public String getName() {
+        return "Cosine";
+    }
 }

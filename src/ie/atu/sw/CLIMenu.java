@@ -176,7 +176,14 @@ public class CLIMenu {
         }
 
         // Once all is ready, create a new simplifier class with configurations, and run the actual simplifier
-        Simplifier googleTop1000Simplifier = new Simplifier();
+        Simplifier googleTop1000Simplifier = new Simplifier(
+                this.simplifiedTextLocation,
+                this.inputFile,
+                this.similarityAlgorithm,
+                this.topWords,
+                this.wordEmbeddingsModel);
+
+        googleTop1000Simplifier.startSimplifying();
 
     }
 

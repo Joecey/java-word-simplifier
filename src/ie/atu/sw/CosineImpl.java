@@ -3,6 +3,11 @@ package ie.atu.sw;
 public class CosineImpl implements ISimilarityCalculation {
     public CosineImpl() {}
 
+    /*
+     * This method calculateSimilarity will be in O(n) time, where n is the length
+     * of the targetWeights/testWeights as it has to traverse the entire array
+     * in order to get a similarityScore calculation
+     */
     @Override
     public double calculateSimilarity(double[] targetWeights, double[] testWeights) {
         // dot product of vector with itself == vector magnitude squared

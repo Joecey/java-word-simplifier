@@ -2,6 +2,12 @@ package ie.atu.sw;
 
 public class EuclideanImpl implements ISimilarityCalculation {
     public EuclideanImpl() {}
+
+    /*
+    * This method calculateSimilarity will be in O(n) time, where n is the length
+    * of the targetWeights/testWeights as it has to traverse the entire array
+    * in order to get a similarityScore calculation
+    */
     @Override
     public double calculateSimilarity(double[] targetWeights, double[] testWeights) {
         double similarityScore = 0.0d;

@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.*;
 
 
-public class ModelWeights {
+public class ModelWeights implements KeyStringMap<List<Double>>{
     private final Map<String, List<Double>> weightsMap = new HashMap<String, List<Double>>();
     private int wordCount;
 
@@ -17,6 +17,10 @@ public class ModelWeights {
         File wordFile = new File(filePath);
         if (!wordFile.exists()) throw new Exception(LogLevels.ERROR.getMessage() + "This is not a valid file path");
         try {
+            /*
+            * In combination, processing the file will is in O(n * m), with n being the amount of words
+            * that are in the file, and m being the length of the weights array (so in our case, it will be m = 50)
+             */
             processFilePath(wordFile);
 
         } catch (Exception err) {
@@ -25,15 +29,23 @@ public class ModelWeights {
     }
 
     ///// Getter methods ////
+    @Override
+    // O(1) since we pre-calculate the word count during the processing step
     public int getWordCount() {
         return wordCount;
     }
 
+    // Lookups in our weightsMap will always be O(1) since we are using a hashMap for key indexing
+    @Override
     public Map<String, List<Double>> getWeightsMap() {
         return weightsMap;
     }
 
     ///// File processing and model creation ////
+
+    /*
+     * processFilePath will be in O(n) time, where n is the number of lines in the given file
+     */
     private void processFilePath(File modelFile) throws Exception {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(modelFile)));
@@ -52,6 +64,8 @@ public class ModelWeights {
         }
     }
 
+    // here for each line, there is a time complexity of O(m - 1), with m being the length of the trimmedSplit
+    // We say -1 here as we do not need the first index of the split
     private void processLine(String currentLine) throws Exception {
         try {
             String trimmed = currentLine.replaceAll("\\s+", "");

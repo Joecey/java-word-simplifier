@@ -6,4 +6,5 @@ public class Simplifier {
     }
 
     // TODO: create one to one mapping
+    // TODO: Grab each line - create an array - iterate through array - create a new string - place in output file
 }

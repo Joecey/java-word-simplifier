@@ -19,6 +19,8 @@ public class EuclideanImpl implements ISimilarityCalculation {
 
         // here is a bit different, the smaller the value the better (i.e. vectors are closer together)
         // for this, we can return the negative similarityScore. i.e. larger value will imply shorter distance
+        // e.g. raw numbers -> 0.2, 0.9 (0,2 is better)
+        // convert to negative -> -0.2, -0.9 (-0.2 is still better)
         return -similarityScore;
     }
 

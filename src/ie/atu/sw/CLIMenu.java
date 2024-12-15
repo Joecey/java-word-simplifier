@@ -1,5 +1,6 @@
 package ie.atu.sw;
 
+import java.io.File;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -12,13 +13,13 @@ public class CLIMenu {
     private String inputFile = null;
 
     private KeyStringMap<List<Double>> wordEmbeddingsModel = null;
-    private KeyStringMap<List<String>> topWords = null;
+    private KeyStringMap<List<Double>> topWords = null;
     private boolean running = true;
     private ISimilarityCalculation similarityAlgorithm = null;
     private boolean timerOn = false;
 
     private enum SetFilePath {
-        WORD_EMBED, OUTPUT, INPUT
+        WORD_EMBED, TOP_WORDS, OUTPUT, INPUT
     }
 
     public CLIMenu() {
@@ -37,7 +38,7 @@ public class CLIMenu {
                 switch (choice) {
                     case 1 -> chooseSimilarityAlgorithm();
                     case 2 -> chooseFilePath(SetFilePath.WORD_EMBED);
-                    case 3 -> chooseTopWordsPath();
+                    case 3 -> chooseFilePath(SetFilePath.TOP_WORDS);
                     case 4 -> chooseFilePath(SetFilePath.OUTPUT);
                     case 5 -> chooseFilePath(SetFilePath.INPUT);
                     case 6 -> enableTimer();
@@ -66,10 +67,14 @@ public class CLIMenu {
         out.println("^^^^\t^^^^\t^^^^\t^^^^\t^^^^\t^^^^");
         out.println(Colours.ANSI_BLUE + "1) Choose Similarity Algorithm " + (this.similarityAlgorithm != null
                 ? "(currently selected: " + this.similarityAlgorithm.getName() + ")" : "")); // DONE
-        out.println(Colours.ANSI_GREEN + "2) Choose path for word embeddings");
-        out.println(Colours.ANSI_GREEN + "3) Choose path for top 1000 google words");
-        out.println(Colours.ANSI_PURPLE + "4) Choose output path for simplified text");
-        out.println(Colours.ANSI_PURPLE + "5) Choose input text to be simplified");
+        out.println(Colours.ANSI_GREEN + "2) Choose path for word embeddings " + (this.wordEmbeddingsModel != null
+                ? Colours.ANSI_GREEN + "READY" : Colours.ANSI_RED + "NOT READY"));
+        out.println(Colours.ANSI_GREEN + "3) Choose path for top 1000 google words " + (this.topWords != null
+                ? Colours.ANSI_GREEN + "READY" : Colours.ANSI_RED + "NOT READY"));
+        out.println(Colours.ANSI_PURPLE + "4) Choose output path for simplified text. " + (this.simplifiedTextLocation != null
+                ? String.format("Currently: %s", this.simplifiedTextLocation) : ""));
+        out.println(Colours.ANSI_PURPLE + "5) Choose input text to be simplified" + (this.inputFile != null
+                ? String.format("Currently: %s", this.inputFile) : ""));
         out.println(Colours.ANSI_YELLOW + "6) Enable timer to record amount of time taken to process text: " +
                 (this.timerOn ? String.format("Timer %s ON", Colours.ANSI_GREEN) :
                         String.format("Timer %s OFF", Colours.ANSI_RED)));
@@ -114,33 +119,46 @@ public class CLIMenu {
         }
     }
 
-    private void chooseTopWordsPath() {
+    private void processTopWordsPath(String inputFile) throws Exception {
         if (wordEmbeddingsModel == null) {
             out.println("Please choose a weighted model before processing simplified word list");
         } else {
-            // TODO: create top google words model
-            out.println("Please type the location of simplified words list text file");
-            out.println("Creating top google words model...");
+            try {
+                out.println("Creating top google words model...");
+                this.topWords = new GoogleWeights(inputFile, (ModelWeights) this.wordEmbeddingsModel);
+                out.println(LogLevels.INFO.getMessage() + topWords.getWordCount() + " words have been processed");
+
+            } catch (Exception err) {
+                throw new Exception(err.getMessage());
+            }
         }
     }
 
     private void chooseFilePath(SetFilePath pathToConfigure) throws Exception {
-        Scanner filePathScanner = new Scanner(in);
-        String filePath = filePathScanner.next().toLowerCase();
-
         String pathChosen = switch (pathToConfigure) {
             case INPUT -> "Input File location";
             case OUTPUT -> "Simplified Output File target location";
             case WORD_EMBED -> "Location of 50d word embeddings file";
+            case TOP_WORDS -> "Location of top 1000 google words file";
             case null -> "No method chosen";
         };
 
         out.printf("Please select file path to configure: %s%n", pathChosen);
 
+        Scanner filePathScanner = new Scanner(in);
+        String filePath = filePathScanner.next().toLowerCase();
+        final String textExtensionCheck = filePath.endsWith(".txt") ? filePath : filePath + ".txt";
+
         switch (pathToConfigure) {
-            case INPUT -> this.inputFile = filePath;
-            case OUTPUT -> this.simplifiedTextLocation = filePath;
+            case OUTPUT -> this.simplifiedTextLocation = textExtensionCheck;
+            case INPUT -> {
+                if (!new File(textExtensionCheck).exists())
+                    out.println(LogLevels.ERROR.getMessage() + "This is not a valid input file!");
+                else this.inputFile = textExtensionCheck;
+
+            }
             case WORD_EMBED -> processWordEmbed(filePath);
+            case TOP_WORDS -> processTopWordsPath(filePath);
             case null -> out.println(LogLevels.WARN.getMessage() + "Method not chosen. Please try again");
         }
     }

@@ -85,15 +85,11 @@ public class CLIMenu {
 
     private void chooseSimilarityAlgorithm() {
         out.println("Please type the similarity algorithm you would like to use");
-        out.print("(C)osine, (D)ot, (E)uclidean: ");
+        out.print("(C)osine, (D)ot: ");
         Scanner algoScanner = new Scanner(in);
         String algoChoice = algoScanner.next().toLowerCase();
 
         switch (algoChoice) {
-            case "euclidean", "e" -> {
-                out.println("You have chosen" + Colours.ANSI_YELLOW + " EUCLIDEAN " + Colours.ANSI_RESET);
-                this.similarityAlgorithm = new EuclideanImpl();
-            }
             case "dot", "d" -> {
                 out.println("You have chosen" + Colours.ANSI_CYAN + " DOT PRODUCT " + Colours.ANSI_RESET);
                 this.similarityAlgorithm = new DotImpl();
@@ -169,7 +165,7 @@ public class CLIMenu {
     }
 
 
-    private void startSimplifying() {
+    private void startSimplifying() throws Exception {
         if (this.simplifiedTextLocation == null || this.inputFile == null || this.similarityAlgorithm == null ||
                 this.topWords == null || this.wordEmbeddingsModel == null) {
             out.println(LogLevels.INFO.getMessage() + "Simplifier is missing configurations. Please try again...");
@@ -180,8 +176,8 @@ public class CLIMenu {
                 this.simplifiedTextLocation,
                 this.inputFile,
                 this.similarityAlgorithm,
-                this.topWords,
-                this.wordEmbeddingsModel);
+                this.wordEmbeddingsModel,
+                this.topWords);
 
         googleTop1000Simplifier.startSimplifying();
 

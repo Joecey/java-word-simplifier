@@ -1,5 +1,7 @@
 package ie.atu.sw;
 
+import java.util.List;
+
 public class CosineImpl implements ISimilarityCalculation {
     public CosineImpl() {}
 
@@ -9,7 +11,7 @@ public class CosineImpl implements ISimilarityCalculation {
      * in order to get a similarityScore calculation
      */
     @Override
-    public double calculateSimilarity(double[] targetWeights, double[] testWeights) {
+    public double calculateSimilarity(List<Double> targetWeights, List<Double> testWeights) {
         // dot product of vector with itself == vector magnitude squared
 
         DotImpl dotProductInstance = new DotImpl();

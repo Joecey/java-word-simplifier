@@ -6,7 +6,9 @@ package ie.atu.sw;
 * two arrays of weights and getName method for easy identifications
 */
 
+import java.util.List;
+
 public interface ISimilarityCalculation {
-    public double calculateSimilarity(double[] targetWeights, double[] testWeights);
+    public double calculateSimilarity(List<Double> targetWeights, List<Double> testWeights);
     public String getName();
 }

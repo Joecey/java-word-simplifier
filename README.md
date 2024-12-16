@@ -6,7 +6,7 @@ and simplify the passage using the top 1000 words according to Google
 module for the H.Dip. in Science (Software Development) from the Atlantic Technological University**
 
 ### Possible Actions
-1. Choose similarity algorithm (Cosine, Dot, Euclidean)
+1. Choose similarity algorithm (Cosine or Dot)
 2. Choose path for word embeddings
 3. Choose path for simplified word embeddings
 4. Choose output path 

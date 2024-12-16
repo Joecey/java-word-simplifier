@@ -1,5 +1,7 @@
 package ie.atu.sw;
 
+import java.util.List;
+
 public class DotImpl implements ISimilarityCalculation {
     public DotImpl() {}
 
@@ -9,7 +11,7 @@ public class DotImpl implements ISimilarityCalculation {
      * in order to get a similarityScore calculation
      */
     @Override
-    public double calculateSimilarity(double[] targetWeights, double[] testWeights) {
+    public double calculateSimilarity(List<Double> targetWeights, List<Double> testWeights) {
         /*
          * if perpendicular = value is 0 meaning zero similarity
          * the largest value = point in same direction
@@ -18,8 +20,8 @@ public class DotImpl implements ISimilarityCalculation {
 
         double similarityScore = 0.0d;
 
-        for (int weight = 0; weight < targetWeights.length; weight++) {
-            similarityScore += (targetWeights[weight] * testWeights[weight]);
+        for (int weight = 0; weight < targetWeights.size(); weight++) {
+            similarityScore += (targetWeights.get(weight) * testWeights.get(weight));
         }
 
         return similarityScore;

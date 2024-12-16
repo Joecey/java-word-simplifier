@@ -16,7 +16,6 @@ public class CLIMenu {
     private KeyStringMap<List<Double>> topWords = null;
     private boolean running = true;
     private ISimilarityCalculation similarityAlgorithm = null;
-    private boolean timerOn = false;
 
     private enum SetFilePath {
         WORD_EMBED, TOP_WORDS, OUTPUT, INPUT
@@ -41,9 +40,8 @@ public class CLIMenu {
                     case 3 -> chooseFilePath(SetFilePath.TOP_WORDS);
                     case 4 -> chooseFilePath(SetFilePath.OUTPUT);
                     case 5 -> chooseFilePath(SetFilePath.INPUT);
-                    case 6 -> enableTimer();
-                    case 7 -> startSimplifying();
-                    case 8 -> {
+                    case 6 -> startSimplifying();
+                    case 7 -> {
                         running = false;
                         out.println(LogLevels.INFO.getMessage() + "Exiting program...");
                     }
@@ -75,11 +73,8 @@ public class CLIMenu {
                 ? String.format("Currently: %s", this.simplifiedTextLocation) : ""));
         out.println(Colours.ANSI_PURPLE + "5) Choose input text to be simplified" + (this.inputFile != null
                 ? String.format("Currently: %s", this.inputFile) : ""));
-        out.println(Colours.ANSI_YELLOW + "6) Enable timer to record amount of time taken to process text: " +
-                (this.timerOn ? String.format("Timer %s ON", Colours.ANSI_GREEN) :
-                        String.format("Timer %s OFF", Colours.ANSI_RED)));
-        out.println(Colours.ANSI_GREEN + "7) Begin word simplification \uD83D\uDD25 \uD83D\uDD25");
-        out.println(Colours.ANSI_RED + "8) Quit" + Colours.ANSI_RESET); // DONE
+        out.println(Colours.ANSI_GREEN + "6) Begin word simplification \uD83D\uDD25 \uD83D\uDD25");
+        out.println(Colours.ANSI_RED + "7) Quit" + Colours.ANSI_RESET); // DONE
         out.print("Select an option [1-8]: ");
     }
 
@@ -157,11 +152,6 @@ public class CLIMenu {
             case TOP_WORDS -> processTopWordsPath(filePath);
             case null -> out.println(LogLevels.WARN.getMessage() + "Method not chosen. Please try again");
         }
-    }
-
-
-    private void enableTimer() {
-        this.timerOn = !this.timerOn;
     }
 
 

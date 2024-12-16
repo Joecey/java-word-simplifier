@@ -11,5 +11,4 @@ module for the H.Dip. in Science (Software Development) from the Atlantic Techno
 3. Choose path for simplified word embeddings
 4. Choose output path 
 5. Choose input path 
-6. Enable timer
-7. Exit Program
+6. Exit Program

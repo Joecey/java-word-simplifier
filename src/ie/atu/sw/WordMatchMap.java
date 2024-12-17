@@ -8,16 +8,20 @@ public class WordMatchMap implements KeyStringMap<String> {
     private Map<String, String> weightsMap = new HashMap<String, String>();
     private int wordCount;
 
-    /* Here we want to intialise a new WordMatchMap class where we will iterate through every word in our
-    * word embeddings model. For each word we will check if it is already in the topWords model. If it is, we can
-    * associate it with itself in the map. If it is not, then we have to perform a comparison between it and every
-    * word in topWords, keeping track of the highest score i.e. most similar word. Then, we can map that found word
-    * to our new key
-    *
-    * The time complexity is, at a high level, O(n*m) where n is the amount of keys in wordEmbeddings and m is the
-    * amount of keys in topWords. This assumes the worst case scenario where no word in wordEmbeddings is in the
-    * topWords model
-    * */
+    /**
+     * Here we want to intialise a new WordMatchMap class where we will iterate through every word in our
+     * word embeddings model. For each word we will check if it is already in the topWords model. If it is, we can
+     * associate it with itself in the map. If it is not, then we have to perform a comparison between it and every
+     * word in topWords, keeping track of the highest score i.e. most similar word. Then, we can map that found word
+     * to our new key
+
+     * The time complexity is, at a high level, O(n*m) where n is the amount of keys in wordEmbeddings and m is the
+     * amount of keys in topWords. This assumes the worst case scenario where no word in wordEmbeddings is in the
+     * topWords model
+     * @param wordEmbeddings - model that represents 50d word embeddings
+     * @param topWords - model that represents top X words from google
+     * @param algo - chosen algorithm for word comparison
+     */
     public WordMatchMap(KeyStringMap<List<Double>> wordEmbeddings,
                         KeyStringMap<List<Double>> topWords,
                         ISimilarityCalculation algo) {

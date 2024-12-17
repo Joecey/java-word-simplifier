@@ -1,14 +1,14 @@
 package ie.atu.sw;
 
-/*
-Purpose of this class is to take a 50d file input and convert it into
-a ModelWeights class
- */
+
 
 import java.io.*;
 import java.util.*;
 
-
+/**
+ * Purpose of this class is to take a 50d file input and convert it into a ModelWeights class
+ *
+ */
 public class ModelWeights implements KeyStringMap<List<Double>>{
     private final Map<String, List<Double>> weightsMap = new HashMap<String, List<Double>>();
     private int wordCount;

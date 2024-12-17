@@ -75,9 +75,12 @@ public class CLIMenu {
                 ? String.format("Currently: %s", this.inputFile) : ""));
         out.println(Colours.ANSI_GREEN + "6) Begin word simplification \uD83D\uDD25 \uD83D\uDD25");
         out.println(Colours.ANSI_RED + "7) Quit" + Colours.ANSI_RESET); // DONE
-        out.print("Select an option [1-8]: ");
+        out.print("Select an option [1-7]: ");
     }
 
+    /**
+     * Choose the similarity algorithm for creating simplified word mappings
+     */
     private void chooseSimilarityAlgorithm() {
         out.println("Please type the similarity algorithm you would like to use");
         out.print("(C)osine, (D)ot: ");
@@ -99,6 +102,12 @@ public class CLIMenu {
         }
     }
 
+    /**
+     * Process the word embeddings file
+     *
+     * @param filePath the path of the word embeddings file
+     * @throws Exception
+     */
     private void processWordEmbed(String filePath) throws Exception {
         try {
             out.println("Creating word embeddings model...");
@@ -109,6 +118,13 @@ public class CLIMenu {
             throw new Exception(err.getMessage());
         }
     }
+
+    /**
+     * Process top words file by searching for existing weight array. Requires wordEmbeddingsModel to be non-null
+     *
+     * @param inputFile the path of the top words .txt file
+     * @throws Exception
+     */
 
     private void processTopWordsPath(String inputFile) throws Exception {
         if (wordEmbeddingsModel == null) {
@@ -125,6 +141,13 @@ public class CLIMenu {
         }
     }
 
+
+    /**
+     * General function used to invoke various functions that require a file path input
+     *
+     * @param pathToConfigure enum value which determines what function uses the path input
+     * @throws Exception
+     */
     private void chooseFilePath(SetFilePath pathToConfigure) throws Exception {
         String pathChosen = switch (pathToConfigure) {
             case INPUT -> "Input File location";

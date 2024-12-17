@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="java-word-simplifier:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/java_word_simplifier_jar</output-path>
+    <root id="archive" name="java-word-simplifier.jar">
+      <element id="module-output" name="java-word-simplifier" />
+    </root>
+  </artifact>
+</component>

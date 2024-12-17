@@ -3,14 +3,24 @@ package ie.atu.sw;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Main class used for running simplifier on input text file
+ */
 public class Simplifier {
-
     private KeyStringMap<String> simplifiedWordMatching;
     private String outputLocation;
     private String inputFileLocation;
     private ISimilarityCalculation algo;
 
-    // Create a new simplifier based on the inputs given by user
+    /**
+     * Create a new simplifier based on the inputs given by user
+     *
+     * @param outputLocation - file path of where to generate completed text
+     * @param inputFileLocation - file path of text to simplify
+     * @param algorithm - chosen algorithm for word comparison
+     * @param wordEmbeddings - model for 50d word embeddings
+     * @param topWords - model for top google words
+     */
     public Simplifier(String outputLocation, String inputFileLocation, ISimilarityCalculation algorithm,
                       KeyStringMap<List<Double>> wordEmbeddings, KeyStringMap<List<Double>> topWords) {
 

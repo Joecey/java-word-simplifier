@@ -6,16 +6,20 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 
-/*
+/**
  * Here, we want to go through every word in the top 1000 words list and find
  * the corresponding weight array from our ModelWeights class in order to
  * create a new map of words which will be used later on
  */
-
 public class GoogleWeights implements KeyStringMap<List<Double>> {
     private int wordCount;
     private final Map<String, List<Double>> weightsMap = new HashMap<String, List<Double>>();
 
+    /**
+     * @param filePath - path of top words (should be line-by-line)
+     * @param modelWeights - word embeddings model used to search for matching words
+     * @throws Exception
+     */
     public GoogleWeights(String filePath, ModelWeights modelWeights) throws Exception {
         File wordFile = new File(filePath);
         if (!wordFile.exists()) throw new Exception(LogLevels.ERROR.getMessage() + "This is not a valid file path");

@@ -5,7 +5,7 @@ import java.util.List;
 public class CosineImpl implements ISimilarityCalculation {
     public CosineImpl() {}
 
-    /*
+    /**
      * This method calculateSimilarity will be in O(n) time, where n is the length
      * of the targetWeights/testWeights as it has to traverse the entire array
      * in order to get a similarityScore calculation

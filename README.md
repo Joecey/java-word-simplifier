@@ -27,7 +27,3 @@ When running this program you have two options:
 
 The steps I used to generate a `.jar` artefact in Intellij can be found 
 [here](https://stackoverflow.com/questions/2025607/how-to-create-a-jar-file-or-export-jar-in-intellij-idea-like-eclipse-java-arch)
-
-### Additional information 
-Additional information can be found in the included UML Diagram under `design.png`, as well as the 
-accompanying `javadocs` directory which provides information on all class and method setups. 
